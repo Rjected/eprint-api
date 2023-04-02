@@ -1,3 +1,5 @@
+use std::str::FromStr;
+
 ///! Possible venues for a paper served by the CryptoDB API
 #[allow(dead_code)]
 
@@ -23,6 +25,7 @@ pub enum EprintVenue {
     Pkc,
 }
 
+// todo: derive this somehow
 impl ToString for EprintVenue {
     fn to_string(&self) -> String {
         match self {
@@ -33,6 +36,23 @@ impl ToString for EprintVenue {
             EprintVenue::Ches => "ches".to_string(),
             EprintVenue::Tcc => "tcc".to_string(),
             EprintVenue::Pkc => "pkc".to_string(),
+        }
+    }
+}
+
+impl FromStr for EprintVenue {
+    type Err = String;
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        match s {
+            "crypto" => Ok(EprintVenue::Crypto),
+            "eurocrypt" => Ok(EprintVenue::Eurocrypt),
+            "asiacrypt" => Ok(EprintVenue::Asiacrypt),
+            "fse" => Ok(EprintVenue::Fse),
+            "ches" => Ok(EprintVenue::Ches),
+            "tcc" => Ok(EprintVenue::Tcc),
+            "pkc" => Ok(EprintVenue::Pkc),
+            _ => Err(format!("Invalid venue: {}", s)),
         }
     }
 }
@@ -56,6 +76,7 @@ mod tests {
 
         for (venue, expected_string) in venue_vectors {
             assert_eq!(venue.to_string(), expected_string);
+            assert_eq!(EprintVenue::from_str(expected_string), Ok(venue));
         }
     }
 }
