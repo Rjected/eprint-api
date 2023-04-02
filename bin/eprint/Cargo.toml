@@ -7,4 +7,11 @@ repository = "https://github.com/rjected/eprint-api"
 readme = "README.md"
 
 [dependencies]
-eprint-lib = { path = "../../" }
+eprint-lib = { path = "../../eprint-lib" }
+
+# async
+tokio = { version = "1.21", features = ["sync", "macros", "rt-multi-thread"] }
+
+# misc
+eyre = "0.6"
+clap = { version = "4", features = ["derive", "cargo"] }
