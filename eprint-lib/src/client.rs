@@ -7,18 +7,15 @@ pub async fn get_eprint_metadata(
     venue: EprintVenue,
     year: u16,
 ) -> Result<EprintMetadataCollection, reqwest::Error> {
-    let url = format!(
-        "https://eprint.iacr.org/cryptodb/data/api/conf.php?year={}&venue={}",
-        year,
-        venue.to_string()
-    );
+    let url = "https://www.iacr.org/cryptodb/data/api/conf.php";
     let client = Client::new();
     let response = client
-        .get(&url)
+        .get(url)
+        .query(&[("year", year.to_string()), ("venue", venue.to_string())])
         .send()
-        .await?
-        .json::<EprintMetadataCollection>()
         .await?;
+
+    let response = response.json::<EprintMetadataCollection>().await?;
 
     Ok(response)
 }

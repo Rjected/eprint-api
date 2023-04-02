@@ -6,9 +6,9 @@ use serde::{Deserialize, Serialize};
 pub struct EprintMetadata {
     /// The paper's unique identifier
     pubkey: u64,
-    /// The paper's DOI
+    /// The paper's DOI, if any
     #[serde(rename = "DOI")]
-    doi: String,
+    doi: Option<String>,
     /// The paper's title
     title: String,
     /// The paper's YouTube link, if any
@@ -26,7 +26,7 @@ pub struct EprintMetadata {
     #[serde(rename = "abstract")]
     paper_abstract: Option<String>,
     /// The pages of the requested proceedings where the paper is located
-    pages: String,
+    pages: Option<String>,
     /// The paper's awards, if any
     award: Option<String>,
     /// The authors of the paper
@@ -34,9 +34,10 @@ pub struct EprintMetadata {
 }
 
 /// A collection of metadata for a set of papers.
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, Default)]
 pub struct EprintMetadataCollection {
     /// The metadata for the requested papers.
+    #[serde(default)]
     papers: Vec<EprintMetadata>,
 }
 

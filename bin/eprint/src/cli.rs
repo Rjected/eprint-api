@@ -23,7 +23,7 @@ pub enum Commands {
 }
 
 #[derive(Debug, Parser)]
-#[command(author, version = "0.1", about = "Eprint API", long_about = None)]
+#[command(author, version = "0.1", about = "Dan's cool crypto eprint API tool!", long_about = None)]
 struct Cli {
     /// The command to run
     #[clap(subcommand)]

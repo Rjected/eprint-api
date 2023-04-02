@@ -9,11 +9,9 @@ use serde_json::to_string_pretty;
 #[derive(Debug, Parser)]
 pub struct Command {
     /// The venue to fetch papers for
-    #[arg(long)]
     venue: String,
 
     /// The year to fetch papers for
-    #[arg(long)]
     year: u16,
 }
 
