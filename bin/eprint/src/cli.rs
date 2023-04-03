@@ -2,7 +2,7 @@
 use crate::fetch;
 use clap::{Parser, Subcommand};
 
-/// Parse CLI options, set up logging and run the chosen command.
+/// Parse CLI options, and run the chosen command
 pub fn run() -> eyre::Result<()> {
     let opt = Cli::parse();
     let rt = tokio::runtime::Builder::new_multi_thread()
