@@ -5,7 +5,7 @@ use clap::Parser;
 use eprint_lib::{get_eprint_metadata, EprintVenue};
 use serde_json::to_string_pretty;
 
-/// Start the node
+/// Fetch the venue metadata
 #[derive(Debug, Parser)]
 pub struct Command {
     /// The venue to fetch papers for
