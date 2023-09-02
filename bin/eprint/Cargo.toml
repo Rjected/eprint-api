@@ -7,7 +7,7 @@ repository = "https://github.com/rjected/eprint-api"
 readme = "README.md"
 
 [dependencies]
-eprint-lib = { path = "../../eprint-lib" }
+eprint-lib = { path = "../../eprint-lib", features = ["clap"] }
 
 # serde
 serde_json = "1.0"
