@@ -1,13 +1,13 @@
+//! Possible venues for a paper served by the CryptoDB API
 use std::str::FromStr;
-
-///! Possible venues for a paper served by the CryptoDB API
 #[allow(dead_code)]
 
 /// All possible venues for the CryptoDB API.
 ///
 /// From the [CryptoDB API documentation](https://www.iacr.org/cryptodb/data/api/):
 ///  * The venue may take the values "crypto", "eurocrypt", "asiacrypt", "fse", "ches", "tcc", or "pkc".
-#[derive(Debug, PartialEq, Eq)]
+#[derive(Debug, PartialEq, Eq, Clone)]
+#[cfg_attr(feature = "clap", derive(clap::ValueEnum))]
 pub enum EprintVenue {
     /// The Crypto conference
     Crypto,

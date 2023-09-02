@@ -9,7 +9,8 @@ use serde_json::to_string_pretty;
 #[derive(Debug, Parser)]
 pub struct Command {
     /// The venue to fetch papers for
-    venue: String,
+    #[arg(value_enum)]
+    venue: EprintVenue,
 
     /// The year to fetch papers for
     year: u16,
@@ -18,8 +19,7 @@ pub struct Command {
 impl Command {
     /// Execute `fetch` command
     pub async fn execute(self) -> eyre::Result<()> {
-        let venue: EprintVenue = self.venue.parse().map_err(|err: String| eyre::eyre!(err))?;
-        let papers = get_eprint_metadata(venue, self.year).await?;
+        let papers = get_eprint_metadata(self.venue, self.year).await?;
         println!("{}", to_string_pretty(&papers)?);
         Ok(())
     }
